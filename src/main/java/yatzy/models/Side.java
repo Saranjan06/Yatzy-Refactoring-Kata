@@ -1,5 +1,8 @@
 package yatzy.models;
 
+/**
+ * @author saran
+ */
 public class Side {
     private int number;
     private boolean visible;
