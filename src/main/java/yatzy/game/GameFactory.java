@@ -1,7 +1,7 @@
 package yatzy.game;
 
 import yatzy.models.Dice;
-import yatzy.models.DiceNumbersEnum;
+import yatzy.enumerators.DiceNumbersEnum;
 
 import java.util.ArrayList;
 import java.util.Arrays;

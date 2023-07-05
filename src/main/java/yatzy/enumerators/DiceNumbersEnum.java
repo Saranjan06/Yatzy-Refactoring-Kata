@@ -1,4 +1,4 @@
-package yatzy.models;
+package yatzy.enumerators;
 
 import java.util.Arrays;
 import java.util.Optional;
