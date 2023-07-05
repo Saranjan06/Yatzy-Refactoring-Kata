@@ -90,12 +90,42 @@ public class Yatzy {
      * @return
      */
     public static int pair(List<Dice> dices) {
+        HashMap<Integer, Integer> pairMap = findPairsInReversingOrder(dices, 1);
         final int pairNumber = 2;
-        HashMap<Integer, Integer> pairMap = reverseNumbersWithOccurrences(dices).entrySet().stream().filter(e -> e.getValue() >= pairNumber).limit(1).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (prev, next) -> next, HashMap::new));
         return pairMap.entrySet().stream().map(e -> e.getKey() * pairNumber).reduce(0, Integer::sum);
     }
 
+
+    /**
+     * Returns the sum of all numbers concerned by the two pairs
+     * @param dices
+     * @return
+     */
+    public static int twoPairs(List<Dice> dices) {
+        HashMap<Integer, Integer> pair = findPairsInReversingOrder(dices, 2);
+        final int pairNumber = 2;
+        return pair.entrySet().stream().map(e -> e.getKey() * pairNumber).reduce(0, Integer::sum);
+    }
+
+
+
 /** *************************************************************************************************************** **/
+
+    /**
+     * Return the number of pairs asked in the parameter
+     * @param dices
+     * @param nbrOfPairs
+     * @return HashMap<Integer,Integer> of pairs found (empty one if not)
+     */
+    private static HashMap<Integer,Integer> findPairsInReversingOrder(List<Dice> dices, int nbrOfPairs) {
+        final int pair = 2;
+        HashMap<Integer,Integer> pairs = reverseNumbersWithOccurrences(dices).entrySet().stream().filter(e -> e.getValue() >= pair).limit(nbrOfPairs).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (prev, next) -> next, HashMap::new));
+        if (pairs.size() == nbrOfPairs) {
+            return pairs;
+        }
+        pairs = new HashMap<>();
+        return pairs;
+    }
 
     /**
      * Return an hashmap of each number with it's occurances in reversing order of the key

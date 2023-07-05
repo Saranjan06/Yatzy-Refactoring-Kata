@@ -211,6 +211,23 @@ public class TestYatzy {
         assertEquals(expected, output, errorMessage(selectedNumbers, expected));
     }
 
+    @Test
+    @DisplayName("Testing twoPairs()...")
+    @Order(10)
+    public void testTwoPairs() {
+        //first test
+        int[] selectedNumbers = {3, 3, 5, 4, 5};
+        int output = Yatzy.twoPairs(GameFactory.initDices(selectedNumbers));
+        int expected = 16;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //second test
+        selectedNumbers = new int[]{3, 3, 5, 5, 5};
+        output = Yatzy.twoPairs(GameFactory.initDices(selectedNumbers));
+        expected = 16;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+    }
+
     /**
      * Returns the formatted message
      * @param input : number of dices
