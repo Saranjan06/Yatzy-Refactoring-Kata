@@ -20,7 +20,7 @@ but in the large projects, it will start with the company's domain (com.companyN
 - Side : a class which describes a side of a Dice
 
 > in the package yatzy.enumerators
-- DiceNumbersEnum : an enumerator which describes all possible numbers if a Dice
+- DiceNumbersEnum : an enumerator which describes all possible numbers of a Dice
 
 > in the package yatzy.game
 - App : a class which contains the main method
