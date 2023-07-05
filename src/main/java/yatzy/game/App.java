@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author saran
  */
-public class Game {
+public class App {
 
     public static void main(String[] args) {
         List<Dice> dices = new ArrayList<>();
