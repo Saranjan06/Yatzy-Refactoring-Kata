@@ -57,7 +57,6 @@ public class Yatzy {
         return DiceNumbersEnum.THREE.getNumber() * (getAppearanceOf(dices, DiceNumbersEnum.THREE));
     }
 
-
     /**
      * Returns the score for the occurances of DiceNumbersEnum.FOUR
      * @param dices
@@ -76,7 +75,6 @@ public class Yatzy {
         return DiceNumbersEnum.FIVE.getNumber() * (getAppearanceOf(dices, DiceNumbersEnum.FIVE));
     }
 
-
     /**
      * Returns the score for the occurances of DiceNumbersEnum.SIX
      * @param dices
@@ -86,7 +84,31 @@ public class Yatzy {
         return DiceNumbersEnum.SIX.getNumber() * (getAppearanceOf(dices, DiceNumbersEnum.SIX));
     }
 
+    /**
+     * Returns the sum of the two highest matching dice
+     * @param dices
+     * @return
+     */
+    public static int pair(List<Dice> dices) {
+        final int pairNumber = 2;
+        HashMap<Integer, Integer> pairMap = reverseNumbersWithOccurrences(dices).entrySet().stream().filter(e -> e.getValue() >= pairNumber).limit(1).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (prev, next) -> next, HashMap::new));
+        return pairMap.entrySet().stream().map(e -> e.getKey() * pairNumber).reduce(0, Integer::sum);
+    }
+
 /** *************************************************************************************************************** **/
+
+    /**
+     * Return an hashmap of each number with it's occurances in reversing order of the key
+     * @param dices
+     * @return (example : input {1, 2, 3, 1, 3}) -> output : {3:2; 2:1; 1:2}
+     */
+    private static HashMap<Integer, Integer> reverseNumbersWithOccurrences(List<Dice> dices) {
+        return getAppearanceOfEachSide(dices).entrySet().stream().sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue,
+                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+    }
 
     /**
      * Returns the number of occurances of a side
