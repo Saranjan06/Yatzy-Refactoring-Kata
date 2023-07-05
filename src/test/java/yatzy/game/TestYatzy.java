@@ -6,6 +6,7 @@ import yatzy.models.Dice;
 import yatzy.models.DiceNumbersEnum;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,17 +19,11 @@ public class TestYatzy {
     @Test
     @DisplayName("Testing chance()...")
     public void testChance() {
-        List<Dice> dices = new ArrayList<>();
-        dices.add(new Dice(DiceNumbersEnum.TWO));
-        dices.add(new Dice(DiceNumbersEnum.THREE));
-        dices.add(new Dice(DiceNumbersEnum.FOUR));
-        dices.add(new Dice(DiceNumbersEnum.FIVE));
-        dices.add(new Dice(DiceNumbersEnum.ONE));
-        int expected = 15;
-
+        int[] selectedNumbers = new int [] {2, 3, 4, 5, 1};
+        List<Dice> dices = GameFactory.initDices(selectedNumbers);
         int output = Yatzy.chance(dices);
-        assertEquals(expected, output, new StringBuilder().append("[2, 3, 4, 5, 1]").append(" should give ").append(expected).toString());
-
+        int expected = 15;
+        assertEquals(expected, output, new StringBuilder().append(Arrays.toString(selectedNumbers)).append(" should give ").append(expected).toString());
     }
 
 }
