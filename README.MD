@@ -21,9 +21,10 @@ but in the large projects, it will start with the company's domain (com.companyN
 - DiceNumbersEnum : an enumerator which describes all possible numbers if a Dice
 
 > in the package yatzy.game
-- Game : a class which contains the main method
+- App : a class which contains the main method
 - Yatzy : this is the class where all the features of the game are presents
 
 > Test
 - TestYatzy : testing class
 ***
+
