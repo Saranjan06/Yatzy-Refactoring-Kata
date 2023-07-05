@@ -228,6 +228,115 @@ public class TestYatzy {
         assertEquals(expected, output, errorMessage(selectedNumbers, expected));
     }
 
+    @Test
+    @DisplayName("Testing threeOfAKind()...")
+    @Order(11)
+    public void testThreeOfAKind() {
+        //first test
+        int[] selectedNumbers = {3, 3, 3, 4, 5};
+        int output = Yatzy.threeOfAKind(GameFactory.initDices(selectedNumbers));
+        int expected = 9;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //second test
+        selectedNumbers = new int[]{5, 3, 5, 4, 5};
+        output = Yatzy.threeOfAKind(GameFactory.initDices(selectedNumbers));
+        expected = 15;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //third test
+        selectedNumbers = new int[]{3, 3, 3, 3, 5};
+        output = Yatzy.threeOfAKind(GameFactory.initDices(selectedNumbers));
+        expected = 9;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+    }
+
+    @Test
+    @DisplayName("Testing fourOfAKind()...")
+    @Order(12)
+    public void testFourOfAKind() {
+        //first test
+        int[] selectedNumbers = {3, 3, 3, 3, 5};
+        int output = Yatzy.fourOfAKind(GameFactory.initDices(selectedNumbers));
+        int expected = 12;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //second test
+        selectedNumbers = new int[]{5, 5, 5, 4, 5};
+        output = Yatzy.fourOfAKind(GameFactory.initDices(selectedNumbers));
+        expected = 20;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //third test
+        selectedNumbers = new int[]{3, 3, 3, 3, 3};
+        output = Yatzy.fourOfAKind(GameFactory.initDices(selectedNumbers));
+        expected = 12;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+    }
+
+    @Test
+    @DisplayName("Testing smallStright()...")
+    @Order(13)
+    public void testSmallStright() {
+        //first test
+        int[] selectedNumbers = {1, 2, 3, 4, 5};
+        int output = Yatzy.smallStright(GameFactory.initDices(selectedNumbers));
+        int expected = 15;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //second test
+        selectedNumbers = new int[]{2, 3, 4, 5, 1};
+        output = Yatzy.smallStright(GameFactory.initDices(selectedNumbers));
+        expected = 15;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //third test
+        selectedNumbers = new int[]{1, 2, 2, 4, 5};
+        output = Yatzy.smallStright(GameFactory.initDices(selectedNumbers));
+        expected = 0;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+    }
+
+    @Test
+    @DisplayName("Testing largeStright()...")
+    @Order(14)
+    public void testLargeStright() {
+        //first test
+        int[] selectedNumbers = {6, 2, 3, 4, 5};
+        int output = Yatzy.largeStright(GameFactory.initDices(selectedNumbers));
+        int expected = 20;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //second test
+        selectedNumbers = new int[]{2, 3, 4, 5, 6};
+        output = Yatzy.largeStright(GameFactory.initDices(selectedNumbers));
+        expected = 20;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //third test
+        selectedNumbers = new int[]{1, 2, 2, 4, 5};
+        output = Yatzy.largeStright(GameFactory.initDices(selectedNumbers));
+        expected = 0;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+    }
+
+    @Test
+    @DisplayName("Testing fullHouse()...")
+    @Order(15)
+    public void testFullHouse() {
+        //first test
+        int[] selectedNumbers = {6, 2, 2, 2, 6};
+        int output = Yatzy.fullHouse(GameFactory.initDices(selectedNumbers));
+        int expected = 18;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+
+        //second test
+        selectedNumbers = new int[]{2, 3, 4, 5, 6};
+        output = Yatzy.fullHouse(GameFactory.initDices(selectedNumbers));
+        expected = 0;
+        assertEquals(expected, output, errorMessage(selectedNumbers, expected));
+    }
+
     /**
      * Returns the formatted message
      * @param input : number of dices

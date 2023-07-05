@@ -107,9 +107,97 @@ public class Yatzy {
         return pair.entrySet().stream().map(e -> e.getKey() * pairNumber).reduce(0, Integer::sum);
     }
 
+    /**
+     * Returns the score for three occurances of a number if exists
+     * @param dices
+     * @return
+     */
+    public static int threeOfAKind(List<Dice> dices) {
+        final int numberOfOccurences = 3;
+        Optional<Map.Entry<Integer, Integer>> entry = findANumberOfAKind(dices, numberOfOccurences);
+        if (entry.isPresent()) {
+            return entry.get().getKey() * numberOfOccurences;
+        }
+        return 0;
+    }
 
+    /**
+     * Returns the score for three occurances of a number if exists
+     * @param dices
+     * @return
+     */
+    public static int fourOfAKind(List<Dice> dices) {
+        final int numberOfOccurences = 4;
+        Optional<Map.Entry<Integer, Integer>> entry = findANumberOfAKind(dices, numberOfOccurences);
+        if (entry.isPresent()) {
+            return entry.get().getKey() * numberOfOccurences;
+        }
+        return 0;
+    }
+
+    /**
+     * Returns the sum of Dices if small stright (1, 2, 3, 4, 5)
+     * @param dices
+     * @return
+     */
+    public static int smallStright(List<Dice> dices) {
+        final int startingNumber = 1;
+        if (strightExists(dices, startingNumber)) {
+            return sumDices(dices);
+        }
+        return 0;
+    }
+
+    /**
+     * Returns the sum of Dices if large stright (2, 3, 4, 5, 6)
+     * @param dices
+     * @return
+     */
+    public static int largeStright(List<Dice> dices) {
+        final int startingNumber = 2;
+        if (strightExists(dices, startingNumber)) {
+            return sumDices(dices);
+        }
+        return 0;
+    }
+
+    /**
+     * Returns the sum of dices if 2 of a kind and 3 of a kind (for example 1, 1, 2, 2, 2 returns : 8)
+     * @param dices
+     * @return
+     */
+    public static int fullHouse(List<Dice> dices) {
+        final int[] numberOfAKind = new int[]{2, 3};
+        final int elementNeededForFullHouse = numberOfAKind.length;
+        HashMap<Integer, Integer> appearancesBySide = getAppearanceOfEachSide(dices);
+        if(appearancesBySide.entrySet().stream().filter(e -> e.getValue() >= numberOfAKind[0]).count() == elementNeededForFullHouse
+            && appearancesBySide.entrySet().stream().anyMatch(e -> e.getValue() >= numberOfAKind[1])) {
+            return sumDices(dices);
+        }
+        return 0;
+    }
 
 /** *************************************************************************************************************** **/
+
+    /**
+     * Returns
+     * @param dices
+     * @return
+     */
+    private static boolean strightExists(List<Dice> dices, int startingNumber) {
+        final int[] cpt = {startingNumber};
+        return getAppearanceOfEachSide(dices).entrySet().stream().sorted(Map.Entry.comparingByKey()).allMatch(e -> e.getKey() == cpt[0]++);
+    }
+
+    /**
+     * Returns the number which is repeated "numberOfOccurences" times
+     * @param dices
+     * @param numberOfOccurences
+     * @return example : {1, 2, 1, 1, 5} with numberOfOccurences = 3 returns {1 : 3}
+     */
+    private static Optional<Map.Entry<Integer, Integer>> findANumberOfAKind(List<Dice> dices, int numberOfOccurences) {
+        return getAppearanceOfEachSide(dices).entrySet().stream().filter(e -> e.getValue() >= numberOfOccurences).findFirst();
+    }
 
     /**
      * Return the number of pairs asked in the parameter
