@@ -24,9 +24,10 @@ but in the large projects, it will start with the company's domain (com.companyN
 
 > in the package yatzy.game
 - App : a class which contains the main method
+- GameFactory : a factory class for initialising easily some dices
 - Yatzy : this is the class where all the features of the game are presents
 
 > Test
-- TestYatzy : testing class
+- TestYatzy : testing class (using JUnit 5)
 ***
 
